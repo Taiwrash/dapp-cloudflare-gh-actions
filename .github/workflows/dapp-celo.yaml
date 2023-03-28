@@ -20,7 +20,7 @@ jobs:
      
       - name: Build App
         run: |
-         npm cache clean –force
+         npm cache clean --force
          rm -rf node_modules/
          rm package-lock.json
          npm install
