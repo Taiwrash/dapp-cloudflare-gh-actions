@@ -1,3 +1,4 @@
+name: Deploy DApp to Cloudflare with GH Actions
 on: [push]
 
 jobs:
