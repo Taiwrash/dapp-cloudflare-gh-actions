@@ -1,0 +1,14 @@
+name = "celodapp"
+
+workers_dev = true
+route = ""
+zone_id = ""
+
+[build]
+command = "npm run build"
+cwd = "build"
+watch_dir = "build"
+
+[site]
+bucket = "./site"
+entry-point = "workers-site"
