@@ -2,13 +2,17 @@ name: Deploy DApp to Cloudflare with GH Actions
 on: [push]
 
 jobs:
-  deploy:
+  publish:
     runs-on: ubuntu-latest
-
+    permissions:
+      contents: read
+      deployments: write
+    name: Publish to Cloudflare Pages
     steps:
-      - name: Checkout repo
+      - name: Checkout
         uses: actions/checkout@v3
-      
+
+      # Run a build step here if your project requires
       - name: Setup NodeJS
         uses: actions/setup-node@v1
         with:
@@ -17,12 +21,11 @@ jobs:
       - name: Build App
         run: |
          npm run build 
-         
-      - name: Publish
-        uses: cloudflare/wrangler-action@2.0.0
+
+      - name: Publish to Cloudflare Pages
+        uses: cloudflare/pages-action@v1
         with:
           apiToken: ${{ secrets.CF_API_TOKEN }}
           accountId: ${{ secrets.CF_ACCOUNT_ID }}
-          command: |
-            npm run build
-            pages publish build/ --project-name=dapp-celo-gh-actions
+          projectName: dapp-celo-gh-actions
+          directory: build/
