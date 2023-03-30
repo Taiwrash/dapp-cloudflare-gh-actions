@@ -31,7 +31,7 @@ jobs:
           apiToken: ${{ secrets.CF_API_TOKEN }}
           accountId: ${{ secrets.CF_ACCOUNT_ID}}
           projectName: /
-          directory: build
+          directory: /
         id: publish
       - name: Outputs
         run: |
