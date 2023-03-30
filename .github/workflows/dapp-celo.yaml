@@ -11,11 +11,15 @@ jobs:
     name: Publish to Cloudflare Pages
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       # Run a build step here if your project requires
       - name: Install dependencies
         run: npm install
+        
+      - name: updating
+        run: npm update --latest react-scripts
+        
       - name: Build DApp
         run: npm run build
 
@@ -26,4 +30,11 @@ jobs:
           accountId: ${{ secrets.CF_ACCOUNT_ID}}
           projectName: /
           directory: build
+        id: publish
+      - name: Outputs
+        run: |
+          echo "ID: ${{ steps.publish.outputs.id }}"
+          echo "URL: ${{ steps.publish.outputs.url }}"
+          echo "Environment: ${{ steps.publish.outputs.environment }}"
+          echo "Alias: ${{ steps.publish.outputs.alias }}"
 
