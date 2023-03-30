@@ -1,35 +1,31 @@
 name: Deploy DApp to Cloudflare with GH Actions
-on: [push]
+on:
+  push:
+    branches: [ main ]
 
 jobs:
-  publish:
+  build-and-deploy:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      deployments: write
-    name: Publish to Cloudflare Pages
+
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+    - name: Checkout code
+      uses: actions/checkout@v2
 
-      # Run a build step here if your project requires
-      - name: Setup NodeJS
-        uses: actions/setup-node@v1
-        with:
-         node-version: '12'
-     
-      - name: Build App
-        run: |
-         npm cache clean --force
-         rm -rf node_modules/
-         rm package-lock.json
-         npm install
-         npm run build 
+    - name: Install dependencies
+      run: npm install
 
-      - name: Publish to Cloudflare Pages
-        uses: cloudflare/pages-action@v1
-        with:
-          apiToken: ${{ secrets.CF_API_TOKEN }}
-          accountId: ${{ secrets.CF_ACCOUNT_ID }}
-          projectName: /
-          directory: build
+    - name: Compile contracts
+      run: npx truffle compile
+
+    - name: Migrate contracts
+      run: npx truffle migrate --network <network-name>
+
+    - name: Build DApp
+      run: npm run build
+
+    - name: Deploy to Cloudflare Pages
+      uses: cloudflare/pages-action@3.14.1
+      with:
+        build_dir: build
+        site_id: ${{ secrets.CF_ACCOUNT_ID}}
+        api_token: ${{ secrets.CF_API_TOKEN }}
