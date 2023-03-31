@@ -32,8 +32,8 @@ jobs:
         with:
          apiToken: ${{ secrets.CF_API_TOKEN }}
          accountId: ${{ secrets.CF_ACCOUNT_ID}}
-         projectName: /
-         directory: /
+         projectName: dapp-cloudflare-gh-actions
+         directory: build
          gitHubToken: ${{ secrets.GITUB_TOKEN }}
         id: publish
       - name: Outputs
