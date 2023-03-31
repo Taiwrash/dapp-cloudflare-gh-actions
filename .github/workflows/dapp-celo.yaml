@@ -22,8 +22,8 @@ jobs:
         
       - name: Build DApp
         run: |
-         # npm run build
-         echo "Build successfull"
+         npm run build
+         # echo "Build successfull"
 
       - name: Publish to Cloudflare Pages
         # run: |
