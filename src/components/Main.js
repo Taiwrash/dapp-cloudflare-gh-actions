@@ -36,6 +36,7 @@ class Main extends Component {
                         width='30'
                         height='30'
                         src={`data:image/png;base64,${new Identicon(post.author, 30).toString()}`}
+                        alt=""
                       />
                       <small className="text-muted">{post.author}</small>
                     </div>
