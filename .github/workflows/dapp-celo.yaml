@@ -20,7 +20,7 @@ jobs:
       - name: Install dependencies
         run: |
           rm -rf node_modules
-          npm cache clean
+          rm package-lock.json
           npm install
         
       # - name: updating
