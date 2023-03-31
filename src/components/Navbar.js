@@ -25,7 +25,7 @@ class Navbar extends Component {
                 width='30'
                 height='30'
                 src={`data:image/png;base64,${new Identicon(this.props.account, 30).toString()}`}
-                alt=""
+                alt="world"
               />
               : <span></span>
             }
