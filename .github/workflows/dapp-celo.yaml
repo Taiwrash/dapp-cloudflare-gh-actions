@@ -32,8 +32,6 @@ jobs:
          # echo "Build successfull"
 
       - name: Publish to Cloudflare Pages
-        # run: |
-        # echo "Published"
         uses: cloudflare/pages-action@v1
         with:
          apiToken: ${{ secrets.CF_API_TOKEN }}
